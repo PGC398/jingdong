@@ -1,20 +1,20 @@
-¾©¶«ÅÀ³æ
+äº¬ä¸œçˆ¬è™«
 ===
-¾©¶«scrapyÅÀ³æ,ÒÀ¾İËÑË÷ÒıÇæÊµÏÖÖ¸¶¨ÉÌÆ·ÅÀ³æ²¢½«ÉÌÆ·²ÎÊıÓëÆÀÂÛÏÂÔØÈë¿â¡£
-ÒÀÀµ
+äº¬ä¸œscrapyçˆ¬è™«,ä¾æ®æœç´¢å¼•æ“å®ç°æŒ‡å®šå•†å“çˆ¬è™«å¹¶å°†å•†å“å‚æ•°ä¸è¯„è®ºä¸‹è½½å…¥åº“ã€‚
+ä¾èµ–
 ===
 	scrapy
 	redis
 	mongodb
-Ê¹ÓÃ
+ä½¿ç”¨
 ===
 	$ git clone ssh://git@42.123.127.93:10022/bujue/jingdong.git
 	$ cd jingdong
-	$ scrapy crawl jd
-·Ö²¼Ê½ÅÀ³æÅäÖÃ
+	$ python start.py
+åˆ†å¸ƒå¼çˆ¬è™«é…ç½®
 ===
-ÔÚjingdong/jingdong/settings.pyÖĞ
-```Python
+åœ¨jingdong/jingdong/settings.pyä¸­
+```python
 
 BOT_NAME = 'jingdong'
 
@@ -22,7 +22,7 @@ SPIDER_MODULES = ['jingdong.spiders']
 NEWSPIDER_MODULE = 'jingdong.spiders'
 
 
-#Ëæ»úä¯ÀÀÆ÷
+#éšæœºæµè§ˆå™¨
 USER_AGENTS = [
 	"Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; AcooBrowser; .NET CLR 1.1.4322; .NET CLR 2.0.50727)",
 	"Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0; Acoo Browser; SLCC1; .NET CLR 2.0.50727; Media Center PC 5.0; .NET CLR 3.0.04506)",
@@ -42,7 +42,7 @@ USER_AGENTS = [
 	"Opera/9.80 (Macintosh; Intel Mac OS X 10.6.8; U; fr) Presto/2.9.168 Version/11.52",
 ]
 
-#´úÀíip
+#ä»£ç†ip
 PROXIES = [
 
 	{'ip_port':'117.93.132.94:8998','user_pass':''},
@@ -52,29 +52,27 @@ PROXIES = [
 
 ROBOTSTXT_OBEY = False
 
-#´úÀíip
+#ä»£ç†ip
 DOWNLOADER_MIDDLEWARES = {
     #'jingdong.middlewares.MyCustomDownloaderMiddleware': 543,
     'jingdong.middlewares.RandomUserAgent': 1,
 }
 
 
-#´Ë´¦ÅäÖÃMongodbÊı¾İ¿â£¬ÓÃÓÚ´æ´¢×îÖÕÅÀÈ¡ÏÂÀ´µÄÊı¾İ
-MONGODB_SERVER = "localhost" #´Ë´¦ÅäÖÃredis,·şÎñÆ÷Ê¹ÓÃ127.0.0.1/localhost ¼´¿É,ÅäÖÃ·Ö²¼Ê½Ê±£¬ĞèÒª´Ó»úÔÚ´Ë´¦ÌîÖ÷»úµÄipµØÖ·,¼´¼¯ÖĞ´æ´¢Êı¾İÓÚ·şÎñÆ÷ÉÏ
-MONGODB_PORT = 27017   #¶Ë¿ÚºÅ
-MONGODB_DB = "pipeline_db"  #Êı¾İ¿âÃû
-MONGODB_COLLECTION = "test3"    #±íÃû
+#æ­¤å¤„é…ç½®Mongodbæ•°æ®åº“ï¼Œç”¨äºå­˜å‚¨æœ€ç»ˆçˆ¬å–ä¸‹æ¥çš„æ•°æ®
+MONGODB_SERVER = "localhost" #æ­¤å¤„é…ç½®redis,æœåŠ¡å™¨ä½¿ç”¨127.0.0.1/localhost å³å¯,é…ç½®åˆ†å¸ƒå¼æ—¶ï¼Œéœ€è¦ä»æœºåœ¨æ­¤å¤„å¡«ä¸»æœºçš„ipåœ°å€,å³é›†ä¸­å­˜å‚¨æ•°æ®äºæœåŠ¡å™¨ä¸Š
+MONGODB_PORT = 27017   #ç«¯å£å·
+MONGODB_DB = "pipeline_db"  #æ•°æ®åº“å
+MONGODB_COLLECTION = "test3"    #è¡¨å
 
-#´Ë´¦ÅäÖÃredisÊı¾İ¿â£¬ÓÃÓÚ´æ´¢ÅÀÈ¡µÄurl
+#æ­¤å¤„é…ç½®redisæ•°æ®åº“ï¼Œç”¨äºå­˜å‚¨çˆ¬å–çš„url
 DUPEFILTER_CLASS = "scrapy_redis.dupefilter.RFPDupeFilter"
 SCHEDULER = "scrapy_redis.scheduler.Scheduler"
 SCHEDULER_PERSIST = True
 SCHEDULER_QUEUE_CLASS = "scrapy_redis.queue.SpiderPriorityQueue"
-REDIS_HOST = '127.0.0.1' #´Ë´¦ÅäÖÃredis,·şÎñÆ÷Ê¹ÓÃ 127.0.0.1/localhost ¼´¿É,ÅäÖÃ·Ö²¼Ê½Ê±£¬ĞèÒª´Ó»úÔÚ´Ë´¦ÌîÖ÷»úµÄipµØÖ·
+REDIS_HOST = '127.0.0.1' #æ­¤å¤„é…ç½®redis,æœåŠ¡å™¨ä½¿ç”¨ 127.0.0.1/localhost å³å¯,é…ç½®åˆ†å¸ƒå¼æ—¶ï¼Œéœ€è¦ä»æœºåœ¨æ­¤å¤„å¡«ä¸»æœºçš„ipåœ°å€
 REDIS_PORT= 6379
 
 ```
 
-×¢:ÅäÖÃºÃ·Ö²¼Ê½ÅÀ³æºó,¿ªÆôÅÀ³æÇ°,Ê×ÏÈÒªÇå¿ÕredisÊı¾İ,È»ºóÔÚ·şÎñÆ÷redisÊı¾İ¿âÖĞ²åÈë³õÊ¼url,²åÈë¸ñÊ½ÈçÏÂ£º
-	lpush mycrawler:start_urls http://taobao.com/
 
